@@ -1,5 +1,11 @@
+import Hero from "./renders/Hero";
+
 const HomePage = () => {
-  return <></>;
+  return (
+    <>
+      <Hero />
+    </>
+  );
 };
 
 export default HomePage;
