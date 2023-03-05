@@ -10,8 +10,10 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Tooltip,
+  HStack,
 } from "@chakra-ui/react";
-import { MdMenu, MdClose } from "react-icons/md";
+import { MdMenu, MdClose, MdDarkMode, MdHelp } from "react-icons/md";
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -30,68 +32,87 @@ const Header = () => {
         align={"center"}
       >
         <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
+          flex={{ base: 1 }}
+          ml={{ base: -2, md: 1 }}
+          display={"flex"}
+          alignItems={"center"}
         >
           <IconButton
+            display={{ base: "flex", md: "none" }}
             onClick={onToggle}
             icon={
               isOpen ? (
-                <MdClose fontSize={"18px"} />
+                <MdClose fontSize={"18px"} color="gray.600" />
               ) : (
-                <MdMenu fontSize={"18px"} />
+                <MdMenu fontSize={"18px"} color="gray.600" />
               )
             }
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
           />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
             color="black"
-            fontWeight={"500"}
+            ml={1.5}
+            fontWeight={"bold"}
           >
             Image Steganography
           </Text>
-
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex display={{ base: "none", md: "flex" }} ml={5}>
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
+        <Flex>
+          <HStack mr={2} spacing={2}>
+            <Tooltip label="Enable dark mode" openDelay={100}>
+              <IconButton
+                variant="unstyled"
+                aria-label={"Dark Mode"}
+                icon={<MdDarkMode fontSize={"21px"} color="gray.200" />}
+              />
+            </Tooltip>
+            <Tooltip label="Help and support" openDelay={100}>
+              <IconButton
+                variant="unstyled"
+                aria-label={"Help and support"}
+                icon={<MdHelp fontSize={"21px"} color="gray.200" />}
+              />
+            </Tooltip>
+          </HStack>
+
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify={"flex-end"}
+            direction={"row"}
+            spacing={6}
           >
-            Sign In
-          </Button>
-          <Button
-            as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"blue.400"}
-            href={"#"}
-            _hover={{
-              bg: "blue.300",
-            }}
-          >
-            Sign Up
-          </Button>
-        </Stack>
+            <Button
+              as={"a"}
+              fontSize={"sm"}
+              fontWeight={400}
+              variant={"link"}
+              href={"#"}
+            >
+              Sign In
+            </Button>
+            <Button
+              as={"a"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"blue.400"}
+              href={"#"}
+              _hover={{
+                bg: "blue.300",
+              }}
+            >
+              Sign Up
+            </Button>
+          </Stack>
+        </Flex>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
