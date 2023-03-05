@@ -33,12 +33,12 @@ const Header = () => {
       >
         <Flex
           flex={{ base: 1 }}
-          ml={{ base: -2, md: 1 }}
+          ml={{ base: -2, lg: 1 }}
           display={"flex"}
           alignItems={"center"}
         >
           <IconButton
-            display={{ base: "flex", md: "none" }}
+            display={{ base: "flex", lg: "none" }}
             onClick={onToggle}
             icon={
               isOpen ? (
@@ -51,7 +51,7 @@ const Header = () => {
             aria-label={"Toggle Navigation"}
           />
           <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
+            textAlign={useBreakpointValue({ base: "center", lg: "left" })}
             fontFamily={"heading"}
             color="black"
             ml={1.5}
@@ -59,7 +59,7 @@ const Header = () => {
           >
             Image Steganography
           </Text>
-          <Flex display={{ base: "none", md: "flex" }} ml={5}>
+          <Flex display={{ base: "none", lg: "flex" }} ml={5}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -70,20 +70,20 @@ const Header = () => {
               <IconButton
                 variant="unstyled"
                 aria-label={"Dark Mode"}
-                icon={<MdDarkMode fontSize={"21px"} color="gray.200" />}
+                icon={<MdDarkMode fontSize={"21px"} color="gray.100" />}
               />
             </Tooltip>
             <Tooltip label="Help and support" openDelay={100}>
               <IconButton
                 variant="unstyled"
                 aria-label={"Help and support"}
-                icon={<MdHelp fontSize={"21px"} color="gray.200" />}
+                icon={<MdHelp fontSize={"21px"} color="gray.100" />}
               />
             </Tooltip>
           </HStack>
 
           <Stack
-            flex={{ base: 1, md: 0 }}
+            flex={{ base: 1, lg: 0 }}
             justify={"flex-end"}
             direction={"row"}
             spacing={6}
@@ -99,7 +99,7 @@ const Header = () => {
             </Button>
             <Button
               as={"a"}
-              display={{ base: "none", md: "inline-flex" }}
+              display={{ base: "none", lg: "inline-flex" }}
               fontSize={"sm"}
               fontWeight={600}
               color={"white"}
@@ -127,7 +127,7 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack direction={"row"} spacing={{ lg: 2, xl: 4 }}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Link
@@ -154,7 +154,7 @@ const MobileNav = () => {
     <Stack
       bg={useColorModeValue("white", "gray.800")}
       p={4}
-      display={{ md: "none" }}
+      display={{ lg: "none" }}
     >
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
