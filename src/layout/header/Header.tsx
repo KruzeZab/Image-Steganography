@@ -12,14 +12,22 @@ import {
   useDisclosure,
   Tooltip,
   HStack,
+  useColorMode,
 } from "@chakra-ui/react";
-import { MdMenu, MdClose, MdDarkMode, MdHelp } from "react-icons/md";
+import {
+  MdMenu,
+  MdClose,
+  MdDarkMode,
+  MdHelp,
+  MdLightMode,
+} from "react-icons/md";
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box>
+    <Box position="fixed" w="100%" zIndex={999}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -28,7 +36,7 @@ const Header = () => {
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("gray.200", "gray.700")}
         align={"center"}
       >
         <Flex
@@ -53,7 +61,7 @@ const Header = () => {
           <Text
             textAlign={useBreakpointValue({ base: "center", lg: "left" })}
             fontFamily={"heading"}
-            color="black"
+            color={useColorModeValue("gray.800", "white")}
             ml={1.5}
             fontWeight={"bold"}
           >
@@ -66,18 +74,45 @@ const Header = () => {
 
         <Flex>
           <HStack mr={2} spacing={2}>
-            <Tooltip label="Enable dark mode" openDelay={100}>
+            <Tooltip
+              label={
+                colorMode === "light" ? "Enable dark mode" : "Enable light mode"
+              }
+              openDelay={100}
+            >
               <IconButton
+                onClick={toggleColorMode}
                 variant="unstyled"
-                aria-label={"Dark Mode"}
-                icon={<MdDarkMode fontSize={"21px"} color="gray.100" />}
+                aria-label={
+                  colorMode === "light"
+                    ? "enable dark Mode"
+                    : "enable light mode"
+                }
+                icon={
+                  colorMode === "light" ? (
+                    <MdDarkMode
+                      fontSize={"21px"}
+                      color={useColorModeValue("gray.600", "gray.200")}
+                    />
+                  ) : (
+                    <MdLightMode
+                      fontSize={"21px"}
+                      color={useColorModeValue("gray.600", "gray.200")}
+                    />
+                  )
+                }
               />
             </Tooltip>
             <Tooltip label="Help and support" openDelay={100}>
               <IconButton
                 variant="unstyled"
                 aria-label={"Help and support"}
-                icon={<MdHelp fontSize={"21px"} color="gray.100" />}
+                icon={
+                  <MdHelp
+                    fontSize={"21px"}
+                    color={useColorModeValue("gray.600", "gray.200")}
+                  />
+                }
               />
             </Tooltip>
           </HStack>

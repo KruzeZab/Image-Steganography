@@ -20,8 +20,9 @@ const Hero = () => {
     <Container maxW={"7xl"}>
       <Stack
         align={"center"}
-        spacing={{ base: 8, lg: 10 }}
+        spacing={{ base: 8, md: 20, lg: 10 }}
         py={{ base: 20, lg: 28 }}
+        pt={{ base: "120px", lg: 28 }}
         direction={{ base: "column", lg: "row" }}
       >
         <Stack flex={1} spacing={{ base: 5, lg: 10 }}>
@@ -36,7 +37,7 @@ const Hero = () => {
               _after={{
                 content: "''",
                 width: "full",
-                height: "30%",
+                height: "20%",
                 position: "absolute",
                 bottom: 1,
                 left: 0,
@@ -52,7 +53,7 @@ const Hero = () => {
               Image Encryption
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
+          <Text>
             Send encrypted messages by embedding them within images using our
             easy-to-use image steganography software. Protect your communication
             and safeguard your privacy with our cutting-edge tools.
@@ -96,7 +97,7 @@ const Hero = () => {
           w={"full"}
         >
           <Blob
-            w={{ base: "100%", lg: "130%" }}
+            w={"100%"}
             h={"150%"}
             position={"absolute"}
             top={"-10%"}
@@ -116,7 +117,7 @@ const Hero = () => {
               alt={"Hero Image"}
               fit={"cover"}
               align={"center"}
-              w={"100%"}
+              w={{ base: "100%", md: "90%", lg: "100%" }}
               h={"100%"}
               src={mainBanner}
             />
