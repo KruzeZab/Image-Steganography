@@ -51,3 +51,41 @@ export const features: Features[] = [
     icon: <FcPrivacy fontSize={"32px"} />,
   },
 ];
+
+interface FAQProps {
+  title: string;
+  description: string;
+}
+
+export const faqs: FAQProps[] = [
+  {
+    title: "What is image steganography?",
+    description:
+      "Image steganography is the practice of hiding secret data or messages within an image file without altering the image's visual appearance.",
+  },
+  {
+    title: "How does image steganography work?",
+    description:
+      "Image steganography works by embedding the secret data or message into the least significant bits of the image's pixels. This allows the data to be hidden within the image without altering its visual appearance.",
+  },
+  {
+    title: "How can I detect if an image contains hidden data?",
+    description:
+      "here are several software tools available for detecting hidden data in images, such as steganalysis software. These tools analyze the image to detect any anomalies or patterns that suggest the presence of hidden data.",
+  },
+  {
+    title: "What are the limitations of image steganography?",
+    description:
+      "The limitations of image steganography include the limited amount of data that can be hidden within an image, the possibility of detection by sophisticated software, and the risk of unintentional disclosure of the hidden data.",
+  },
+  {
+    title: "What are the applications of image steganography?",
+    description:
+      "Image steganography has several applications, including covert communication, copyright protection, and digital watermarking.",
+  },
+  {
+    title: "What are the different image steganography techniques?",
+    description:
+      "There are several types of image steganography techniques, including LSB (Least Significant Bit) steganography, spatial domain steganography, and frequency domain steganography.",
+  },
+];

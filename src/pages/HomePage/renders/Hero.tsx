@@ -20,7 +20,7 @@ const Hero = () => {
     <Container maxW={"7xl"}>
       <Stack
         align={"center"}
-        spacing={{ base: 8, md: 20, lg: 10 }}
+        spacing={{ base: 8, sm: "80px", md: 20, lg: 10 }}
         py={{ base: 20, lg: 28 }}
         pt={{ base: "120px", lg: 28 }}
         direction={{ base: "column", lg: "row" }}
