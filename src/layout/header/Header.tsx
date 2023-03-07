@@ -146,7 +146,7 @@ const Header = () => {
               fontWeight={600}
               color={"white"}
               bg={"blue.400"}
-              to="/signup"
+              to="/register/"
               _hover={{
                 bg: "blue.300",
               }}

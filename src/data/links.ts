@@ -11,7 +11,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Get started",
-    href: "/login/",
+    href: "/register/",
   },
   {
     label: "How it works?",
