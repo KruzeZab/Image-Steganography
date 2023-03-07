@@ -35,7 +35,7 @@ const SingleFAQ = ({ title, description }: SingleFAQProps) => {
 const FAQ = () => {
   return (
     <Accordion allowMultiple>
-      <SimpleGrid columns={2} columnGap={10} rowGap={5}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} columnGap={10} rowGap={5}>
         {faqs.map(({ title, description }) => (
           <Box key={title}>
             <SingleFAQ title={title} description={description} />

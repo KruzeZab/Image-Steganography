@@ -43,7 +43,7 @@ const SingleFeature = ({ title, icon, description }: SingleFeatureProps) => {
 
 const Feature = () => {
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={5}>
       {features.map(({ title, icon, description }) => (
         <SingleFeature
           key={title}

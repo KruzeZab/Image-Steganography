@@ -21,13 +21,17 @@ import {
   MdHelp,
   MdLightMode,
 } from "react-icons/md";
+import { BiLinkExternal } from "react-icons/bi";
+
+import { Link as RouterLink } from "react-router-dom";
+import { type NavItem, NAV_ITEMS } from "../../data/links";
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box position="fixed" w="100%" zIndex={999}>
+    <Box position="fixed" w="100%" zIndex={999} pb={20}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -58,15 +62,18 @@ const Header = () => {
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
           />
-          <Text
+          <Link
+            as={RouterLink}
+            to="/"
+            _hover={{ textUnderline: "none" }}
             textAlign={useBreakpointValue({ base: "center", lg: "left" })}
             fontFamily={"heading"}
             color={useColorModeValue("gray.800", "white")}
-            ml={1.5}
+            ml={1}
             fontWeight={"bold"}
           >
             Image Steganography
-          </Text>
+          </Link>
           <Flex display={{ base: "none", lg: "flex" }} ml={5}>
             <DesktopNav />
           </Flex>
@@ -124,22 +131,22 @@ const Header = () => {
             spacing={6}
           >
             <Button
-              as={"a"}
+              as={RouterLink}
               fontSize={"sm"}
               fontWeight={400}
               variant={"link"}
-              href={"#"}
+              to={"/login"}
             >
               Sign In
             </Button>
             <Button
-              as={"a"}
+              as={RouterLink}
               display={{ base: "none", lg: "inline-flex" }}
               fontSize={"sm"}
               fontWeight={600}
               color={"white"}
               bg={"blue.400"}
-              href={"#"}
+              to="/signup"
               _hover={{
                 bg: "blue.300",
               }}
@@ -166,8 +173,12 @@ const DesktopNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Link
-            p={2}
-            href={navItem.href ?? "#"}
+            isExternal={navItem.external}
+            to={navItem.href ?? "#"}
+            display="flex"
+            alignItems={"center"}
+            as={RouterLink}
+            p={1}
             fontSize={"sm"}
             fontWeight={500}
             color={linkColor}
@@ -177,6 +188,9 @@ const DesktopNav = () => {
             }}
           >
             {navItem.label}
+            <Box pl={1} as="span">
+              {navItem.external && <BiLinkExternal />}
+            </Box>
           </Link>
         </Box>
       ))}
@@ -198,16 +212,15 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, href }: NavItem) => {
+const MobileNavItem = ({ label, href, external }: NavItem) => {
   const { onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={onToggle}>
       <Flex
         py={2}
-        as={Link}
-        href={href ?? "#"}
-        justify={"space-between"}
+        as={RouterLink}
+        to={href ?? "#"}
         align={"center"}
         _hover={{
           textDecoration: "none",
@@ -219,41 +232,12 @@ const MobileNavItem = ({ label, href }: NavItem) => {
         >
           {label}
         </Text>
+        <Box pl={1} as="span">
+          {external && <BiLinkExternal />}
+        </Box>
       </Flex>
     </Stack>
   );
 };
-
-interface NavItem {
-  label: string;
-  href?: string;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  {
-    label: "About",
-    href: "about/",
-  },
-  {
-    label: "Get started",
-    href: "#",
-  },
-  {
-    label: "How it works?",
-    href: "#",
-  },
-  {
-    label: "View Github",
-    href: "#",
-  },
-  {
-    label: "Donate us",
-    href: "#",
-  },
-  {
-    label: "FAQs",
-    href: "#",
-  },
-];
 
 export default Header;

@@ -18,7 +18,6 @@ export default function CallToActionWithVideo() {
         align={"center"}
         justify="space-between"
         spacing={{ base: 8, md: 12 }}
-        py={{ base: 20, md: 28 }}
         direction={{ base: "column", md: "row" }}
       >
         <Stack flex={1} spacing={{ base: 5, md: 8 }}>
@@ -54,7 +53,7 @@ export default function CallToActionWithVideo() {
         </Stack>
         <Flex
           flex={1}
-          justify={"flex-end"}
+          justify={{ base: "center", md: "flex-end" }}
           align={"center"}
           position={"relative"}
           w={"full"}
@@ -64,7 +63,7 @@ export default function CallToActionWithVideo() {
             height={"300px"}
             rounded={"2xl"}
             boxShadow={"xl"}
-            width={"80%"}
+            width={{ base: "100%", lg: "80%" }}
             overflow={"hidden"}
           >
             <Image

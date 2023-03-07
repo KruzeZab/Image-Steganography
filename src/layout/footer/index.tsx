@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaYoutube } from "react-icons/fa";
 import { type ReactNode } from "react";
 
 const SocialButton = ({
@@ -47,7 +47,7 @@ const Footer = () => {
     <Box
       p={2}
       borderTop={"1px solid"}
-      borderColor={useColorModeValue("gray.100", "gray.700")}
+      borderColor={useColorModeValue("gray.200", "gray.700")}
     >
       <Container
         as={Stack}
@@ -60,13 +60,16 @@ const Footer = () => {
       >
         <Text>© 2022 Image Steganography. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
-          <SocialButton label={"Twitter"} href={"#"}>
-            <FaTwitter />
+          <SocialButton
+            label={"Twitter"}
+            href={"https://github.com/KruzeZab/Image-Steganography"}
+          >
+            <FaGithub />
           </SocialButton>
-          <SocialButton label={"YouTube"} href={"#"}>
+          <SocialButton label={"YouTube"} href={"https://youtube.com"}>
             <FaYoutube />
           </SocialButton>
-          <SocialButton label={"Instagram"} href={"#"}>
+          <SocialButton label={"Instagram"} href={"https://instagram.com"}>
             <FaInstagram />
           </SocialButton>
         </Stack>
