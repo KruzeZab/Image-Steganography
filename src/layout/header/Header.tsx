@@ -13,6 +13,7 @@ import {
   Tooltip,
   HStack,
   useColorMode,
+  // Progress,
 } from "@chakra-ui/react";
 import {
   MdMenu,
@@ -85,7 +86,6 @@ const Header = () => {
               label={
                 colorMode === "light" ? "Enable dark mode" : "Enable light mode"
               }
-              openDelay={100}
             >
               <IconButton
                 onClick={toggleColorMode}
@@ -110,8 +110,13 @@ const Header = () => {
                 }
               />
             </Tooltip>
-            <Tooltip label="Help and support" openDelay={100}>
+            <Tooltip label="Help and support">
               <IconButton
+                display={"flex"}
+                alignItems="center"
+                justifyContent={"flex-start"}
+                as={RouterLink}
+                to={"/help-and-support/"}
                 variant="unstyled"
                 aria-label={"Help and support"}
                 icon={
@@ -160,6 +165,7 @@ const Header = () => {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
+      {/* <Progress isIndeterminate size="xs" bg="transparent" /> */}
     </Box>
   );
 };
