@@ -140,7 +140,7 @@ const Header = () => {
               fontSize={"sm"}
               fontWeight={400}
               variant={"link"}
-              to={"/login"}
+              to={"/login/"}
             >
               Sign In
             </Button>

@@ -13,6 +13,7 @@ import {
   useColorModeValue,
   FormControl,
   FormLabel,
+  Checkbox,
 } from "@chakra-ui/react";
 
 const SignupPage = () => {
@@ -20,7 +21,7 @@ const SignupPage = () => {
     <Box position={"relative"}>
       <Container
         pt={40}
-        minH={"90vh"}
+        minH={"95vh"}
         as={SimpleGrid}
         maxW={"7xl"}
         columns={{ base: 1, lg: 2 }}
@@ -121,6 +122,12 @@ const SignupPage = () => {
                   border={0}
                 />
               </FormControl>
+
+              <Checkbox>
+                <Text color={useColorModeValue("gray.600", "gray.300")}>
+                  Show Password
+                </Text>
+              </Checkbox>
             </Stack>
             <Button
               // isLoading

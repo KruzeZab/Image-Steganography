@@ -21,6 +21,7 @@ const SocialButton = ({
 }) => {
   return (
     <chakra.button
+      target={"_blank"}
       bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
       rounded={"full"}
       w={8}

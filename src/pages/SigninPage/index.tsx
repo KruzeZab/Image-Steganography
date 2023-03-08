@@ -12,13 +12,14 @@ import {
   useColorModeValue,
   FormControl,
   FormLabel,
+  Checkbox,
 } from "@chakra-ui/react";
 
 const SigninPage = () => {
   return (
     <Box position={"relative"}>
       <Container
-        minH={"90vh"}
+        minH={"92vh"}
         as={Stack}
         justifyContent={"center"}
         justify
@@ -80,6 +81,11 @@ const SigninPage = () => {
                   border={0}
                 />
               </FormControl>
+              <Checkbox>
+                <Text color={useColorModeValue("gray.600", "gray.300")}>
+                  Show Password
+                </Text>
+              </Checkbox>
             </Stack>
             <Button
               // isLoading

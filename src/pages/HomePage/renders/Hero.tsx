@@ -12,6 +12,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { Link as RouterLink } from "react-router-dom";
 
 import mainBanner from "./main-banner.jpeg";
 
@@ -63,6 +64,8 @@ const Hero = () => {
             direction={{ base: "column", sm: "row" }}
           >
             <Button
+              as={RouterLink}
+              to={"/register/"}
               rounded={"full"}
               size={"lg"}
               fontWeight={"normal"}
@@ -74,6 +77,8 @@ const Hero = () => {
               Get started
             </Button>
             <Button
+              as={RouterLink}
+              to={"/guide/"}
               rounded={"full"}
               size={"lg"}
               fontWeight={"normal"}
