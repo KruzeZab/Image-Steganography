@@ -1,20 +1,12 @@
 import {
   Box,
-  Stack,
-  Heading,
-  Text,
   Container,
-  Input,
-  Button,
   SimpleGrid,
   useBreakpointValue,
   type IconProps,
   Icon,
-  useColorModeValue,
-  FormControl,
-  FormLabel,
-  Checkbox,
 } from "@chakra-ui/react";
+import SignupView from "../../features/auth/Signup/SignupView";
 
 const SignupPage = () => {
   return (
@@ -27,120 +19,7 @@ const SignupPage = () => {
         columns={{ base: 1, lg: 2 }}
         spacing={{ base: 10, lg: 32 }}
       >
-        <Stack spacing={{ base: 10, md: 20 }}>
-          <Heading
-            lineHeight={1.1}
-            fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl" }}
-          >
-            Protect your privacy with duo{" "}
-            <Text
-              as={"span"}
-              bgGradient="linear(to-r, blue.400,cyan.400)"
-              bgClip="text"
-            >
-              &
-            </Text>{" "}
-            Image and Steganography
-          </Heading>
-        </Stack>
-        <Stack
-          bg={useColorModeValue("white", "gray.800")}
-          alignSelf={"flex-start"}
-          border="1px solid"
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          rounded={"xl"}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: "lg" }}
-        >
-          <Stack spacing={4}>
-            <Heading
-              color={useColorModeValue("gray.700", "white")}
-              lineHeight={1.1}
-              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
-            >
-              Create an account{" "}
-              <Text
-                as={"span"}
-                bgGradient="linear(to-r, blue.400,cyan.400)"
-                bgClip="text"
-              >
-                !
-              </Text>
-            </Heading>
-            <Text
-              color={useColorModeValue("gray.600", "gray.300")}
-              fontSize={{ base: "sm", sm: "md" }}
-            >
-              Join our community today! Create an account to encrypt your
-              messages and share them with your friends. It is 100% free and
-              always will be.
-            </Text>
-          </Stack>
-          <Box as={"form"} mt={10}>
-            <Stack spacing={4}>
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Username:
-                </FormLabel>
-
-                <Input
-                  autoFocus
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Email:
-                </FormLabel>
-                <Input
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Password:
-                </FormLabel>
-                <Input
-                  type="password"
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Confirm Password:
-                </FormLabel>
-                <Input
-                  type="password"
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-
-              <Checkbox>
-                <Text color={useColorModeValue("gray.600", "gray.300")}>
-                  Show Password
-                </Text>
-              </Checkbox>
-            </Stack>
-            <Button
-              // isLoading
-              fontFamily={"heading"}
-              mt={8}
-              w={"full"}
-              colorScheme={"blue"}
-            >
-              Sign up
-            </Button>
-          </Box>
-          form
-        </Stack>
+        <SignupView />
       </Container>
       <Blur
         position={"absolute"}

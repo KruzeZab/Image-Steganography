@@ -1,19 +1,12 @@
 import {
   Box,
   Stack,
-  Heading,
-  Text,
   Container,
-  Input,
-  Button,
   useBreakpointValue,
   type IconProps,
   Icon,
-  useColorModeValue,
-  FormControl,
-  FormLabel,
-  Checkbox,
 } from "@chakra-ui/react";
+import SigninView from "../../features/auth/Signin/SigninView";
 
 const SigninPage = () => {
   return (
@@ -25,79 +18,7 @@ const SigninPage = () => {
         justify
         maxW={"7xl"}
       >
-        <Stack
-          bg={useColorModeValue("white", "gray.800")}
-          alignSelf={"center"}
-          border="1px solid"
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          rounded={"xl"}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: "lg" }}
-        >
-          <Stack spacing={4}>
-            <Heading
-              color={useColorModeValue("gray.700", "white")}
-              lineHeight={1.1}
-              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
-            >
-              Login to continue{" "}
-              <Text
-                as={"span"}
-                bgGradient="linear(to-r, blue.400,cyan.400)"
-                bgClip="text"
-              >
-                !
-              </Text>
-            </Heading>
-            <Text
-              color={useColorModeValue("gray.600", "gray.300")}
-              fontSize={{ base: "sm", sm: "md" }}
-            >
-              Welcome back! Please log in to your account to start encrypting /
-              decrypting images and manage your contents.
-            </Text>
-          </Stack>
-          <Box as={"form"} mt={10}>
-            <Stack spacing={4}>
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Email:
-                </FormLabel>
-                <Input
-                  autoFocus
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-                  Password:
-                </FormLabel>
-                <Input
-                  type="password"
-                  bg={useColorModeValue("gray.200", "gray.700")}
-                  border={0}
-                />
-              </FormControl>
-              <Checkbox>
-                <Text color={useColorModeValue("gray.600", "gray.300")}>
-                  Show Password
-                </Text>
-              </Checkbox>
-            </Stack>
-            <Button
-              // isLoading
-              fontFamily={"heading"}
-              mt={8}
-              w={"full"}
-              colorScheme={"blue"}
-            >
-              Sign in
-            </Button>
-          </Box>
-        </Stack>
+        <SigninView />
         <Blur
           position={"absolute"}
           top={-10}
