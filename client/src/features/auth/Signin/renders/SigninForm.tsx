@@ -3,16 +3,19 @@ import {
   Box,
   Button,
   Checkbox,
+  Divider,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
+  Link,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 interface SigninFormProps {
   onSubmit: (values: any) => void;
@@ -38,63 +41,76 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
   };
 
   return (
-    <Box as={"form"} mt={10} onSubmit={handleSubmit(onSubmit)}>
-      <Stack spacing={4}>
-        <FormControl isInvalid={!!errors.username}>
-          <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-            Email:
-          </FormLabel>
-          <Input
-            autoFocus
-            {...register("username", {
-              onBlur: handleInstantChange,
-            })}
-            bg={useColorModeValue("gray.200", "gray.700")}
-            border={0}
-          />
-          {errors.username && (
-            <FormErrorMessage>
-              {String(errors?.username?.message)}
-            </FormErrorMessage>
-          )}
-        </FormControl>
+    <Box mt={10}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack spacing={4}>
+          <FormControl isInvalid={!!errors.username}>
+            <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
+              Email:
+            </FormLabel>
+            <Input
+              autoFocus
+              {...register("username", {
+                onBlur: handleInstantChange,
+              })}
+              bg={useColorModeValue("gray.200", "gray.700")}
+              border={0}
+            />
+            {errors.username && (
+              <FormErrorMessage>
+                {String(errors?.username?.message)}
+              </FormErrorMessage>
+            )}
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.password}>
-          <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-            Password:
-          </FormLabel>
-          <Input
-            {...register("password", {})}
-            type={showPass ? "text" : "password"}
-            bg={useColorModeValue("gray.200", "gray.700")}
-            border={0}
-          />
-          {errors.password && (
-            <FormErrorMessage>
-              {String(errors?.password?.message)}
-            </FormErrorMessage>
-          )}
-        </FormControl>
-        <Checkbox
-          onChange={() => {
-            setShowPass((pass) => !pass);
-          }}
+          <FormControl isInvalid={!!errors.password}>
+            <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
+              Password:
+            </FormLabel>
+            <Input
+              {...register("password", {})}
+              type={showPass ? "text" : "password"}
+              bg={useColorModeValue("gray.200", "gray.700")}
+              border={0}
+            />
+            {errors.password && (
+              <FormErrorMessage>
+                {String(errors?.password?.message)}
+              </FormErrorMessage>
+            )}
+          </FormControl>
+          <Checkbox
+            onChange={() => {
+              setShowPass((pass) => !pass);
+            }}
+          >
+            <Text color={useColorModeValue("gray.600", "gray.300")}>
+              Show Password
+            </Text>
+          </Checkbox>
+        </Stack>
+        <Button
+          type="submit"
+          // isLoading
+          fontFamily={"heading"}
+          mt={8}
+          w={"full"}
+          colorScheme={"blue"}
         >
-          <Text color={useColorModeValue("gray.600", "gray.300")}>
-            Show Password
-          </Text>
-        </Checkbox>
-      </Stack>
-      <Button
-        type="submit"
-        // isLoading
-        fontFamily={"heading"}
-        mt={8}
-        w={"full"}
-        colorScheme={"blue"}
-      >
-        Sign in
-      </Button>
+          Sign in
+        </Button>
+      </form>
+
+      <Text color={useColorModeValue("gray.600", "gray.300")} mt={5}>
+        Don't have an account?{" "}
+        <Link
+          as={RouterLink}
+          to={"/register/"}
+          color={useColorModeValue("blue.600", "blue.300")}
+        >
+          Register here
+        </Link>
+      </Text>
     </Box>
   );
 };

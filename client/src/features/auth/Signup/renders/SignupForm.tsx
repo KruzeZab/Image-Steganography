@@ -1,6 +1,7 @@
 import propTypes from "prop-types";
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
   Button,
@@ -10,6 +11,7 @@ import {
   FormHelperText,
   FormLabel,
   Input,
+  Link,
   Stack,
   Text,
   useColorModeValue,
@@ -160,6 +162,17 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
       >
         Sign up
       </Button>
+
+      <Text color={useColorModeValue("gray.600", "gray.300")} mt={5}>
+        Already have an account?{" "}
+        <Link
+          as={RouterLink}
+          to={"/login/"}
+          color={useColorModeValue("blue.600", "blue.300")}
+        >
+          Login here
+        </Link>
+      </Text>
     </Box>
   );
 };

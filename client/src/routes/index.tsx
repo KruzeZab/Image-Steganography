@@ -12,6 +12,12 @@ import HomePage from "../pages/HomePage";
 import PageNotFound from "../pages/PageNotFound";
 import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
+import PrivateRoute from "./PrivateRoute";
+
+// const defaultPrivateRouteProps: Omit<PrivateRouteProps, "outlet"> = {
+//   isAuthenticated: false,
+//   authenticationPath: "/login",
+// };
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +30,11 @@ const router = createBrowserRouter(
       <Route path="guide/" element={<GuidePage />} />
       <Route path="donate/" element={<DonatePage />} />
       <Route path="*" element={<PageNotFound />} />
+
+      <Route
+        path="protected"
+        element={<PrivateRoute outlet={<AboutPage />} />}
+      />
     </Route>
   )
 );

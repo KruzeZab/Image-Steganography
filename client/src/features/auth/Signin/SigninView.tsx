@@ -1,5 +1,8 @@
-import { Stack, useColorModeValue } from "@chakra-ui/react";
+import { Button, Stack, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { loginUser, logout } from "../authSlice";
 import SigninBanner from "./renders/SigninBanner";
 import SigninForm from "./renders/SigninForm";
 
@@ -7,8 +10,16 @@ const SigninView = () => {
   const rhf = useForm();
   // const from = location.state?.from?.pathname || "/";
 
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+
   const onSubmit = (values: any) => {
     rhf.reset();
+    dispatch(loginUser(values)).then(() => {
+      navigate("/protected/");
+    });
   };
 
   return (
@@ -23,6 +34,8 @@ const SigninView = () => {
       maxW={{ lg: "lg" }}
     >
       <SigninBanner />
+      {user && <h1>{user.username}</h1>}
+      <Button onClick={() => dispatch(logout())}>Logout</Button>
       <FormProvider {...rhf}>
         <SigninForm onSubmit={onSubmit} />
       </FormProvider>
