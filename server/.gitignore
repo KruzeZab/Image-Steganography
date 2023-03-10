@@ -1,0 +1,9 @@
+venv
+__pycache__
+.env
+uploads
+db.sqlite3
+tmp
+assets/
+stderr.log
+.htaccess
