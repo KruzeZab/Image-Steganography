@@ -15,7 +15,7 @@ import {
   Stack,
   Text,
   useColorModeValue,
-  Heading,
+  Alert,
 } from "@chakra-ui/react";
 import {
   emailValidate,
