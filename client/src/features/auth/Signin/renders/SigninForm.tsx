@@ -16,6 +16,8 @@ import {
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
+import { logout } from "../../authSlice";
 
 interface SigninFormProps {
   onSubmit: (values: any) => void;
@@ -32,6 +34,9 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
   // State
   const [showPass, setShowPass] = useState(false);
 
+  const { loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
   // Handlers
   const handleInstantChange: (
     e: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +46,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
   };
 
   return (
-    <Box mt={10}>
+    <Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
           <FormControl isInvalid={!!errors.username}>
@@ -91,7 +96,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
         </Stack>
         <Button
           type="submit"
-          // isLoading
+          isLoading={loading}
           fontFamily={"heading"}
           mt={8}
           w={"full"}
@@ -111,6 +116,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
           Register here
         </Link>
       </Text>
+      <Button onClick={() => dispatch(logout())}>Logout</Button>
     </Box>
   );
 };

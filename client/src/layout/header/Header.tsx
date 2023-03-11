@@ -13,7 +13,7 @@ import {
   Tooltip,
   HStack,
   useColorMode,
-  // Progress,
+  Progress,
 } from "@chakra-ui/react";
 import {
   MdMenu,
@@ -26,13 +26,16 @@ import { BiLinkExternal } from "react-icons/bi";
 
 import { Link as RouterLink } from "react-router-dom";
 import { type NavItem, NAV_ITEMS } from "../../data/links";
+import { useAppSelector } from "../../app/hooks";
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const loading = useAppSelector((state) => state.auth.loading);
+
   return (
-    <Box position="fixed" w="100%" zIndex={999} pb={20}>
+    <Box as="header" position="fixed" w="100%" zIndex={999} pb={20}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -165,7 +168,7 @@ const Header = () => {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
-      {/* <Progress isIndeterminate size="xs" bg="transparent" /> */}
+      {loading && <Progress isIndeterminate size="xs" bg="transparent" />}
     </Box>
   );
 };

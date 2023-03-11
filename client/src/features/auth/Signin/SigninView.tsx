@@ -1,10 +1,12 @@
-import { Button, Stack, useColorModeValue } from "@chakra-ui/react";
+import { Alert, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
+import { MdError } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { loginUser, logout } from "../authSlice";
+import { loginUser } from "../authActions";
 import SigninBanner from "./renders/SigninBanner";
 import SigninForm from "./renders/SigninForm";
+import { Heading } from "@chakra-ui/react";
 
 const SigninView = () => {
   const rhf = useForm();
@@ -13,7 +15,7 @@ const SigninView = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
+  const { error } = useAppSelector((state) => state.auth);
 
   const onSubmit = (values: any) => {
     rhf.reset();
@@ -30,12 +32,16 @@ const SigninView = () => {
       borderColor={useColorModeValue("gray.200", "gray.700")}
       rounded={"xl"}
       p={{ base: 4, sm: 6, md: 8 }}
-      spacing={{ base: 8 }}
+      spacing={{ base: 6 }}
       maxW={{ lg: "lg" }}
     >
       <SigninBanner />
-      {user && <h1>{user.username}</h1>}
-      <Button onClick={() => dispatch(logout())}>Logout</Button>
+      {error && (
+        <Alert status="error" display="flex" alignItems={"center"}>
+          <MdError fontSize={"18px"} />
+          <Text ml={1}>{error}</Text>
+        </Alert>
+      )}
       <FormProvider {...rhf}>
         <SigninForm onSubmit={onSubmit} />
       </FormProvider>
