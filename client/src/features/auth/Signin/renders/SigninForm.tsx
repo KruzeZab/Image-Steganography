@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Divider,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -107,7 +106,7 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
       </form>
 
       <Text color={useColorModeValue("gray.600", "gray.300")} mt={5}>
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           as={RouterLink}
           to={"/register/"}

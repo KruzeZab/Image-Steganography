@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import jwt_decode from "jwt-decode";
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 import type { ResponsePayload, UserPayload } from "./authSlice";
 
 interface LoginUserParams {
@@ -8,7 +8,7 @@ interface LoginUserParams {
   password: string;
 }
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL: string = import.meta.env.VITE_SERVER_URL;
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -27,6 +27,7 @@ export const loginUser = createAsyncThunk(
         }
       );
 
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { user_id, username } = jwt_decode<UserPayload>(
         response.data.access
       );

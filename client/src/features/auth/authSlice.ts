@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import jwt_decode from "jwt-decode";
 import { loginUser } from "./authActions";
@@ -24,6 +24,7 @@ const userToken = localStorage.getItem("authTokens") ?? "";
 
 const getUserInfo = () => {
   if (userToken) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { user_id, username } = jwt_decode<UserPayload>(
       JSON.parse(userToken).access
     );

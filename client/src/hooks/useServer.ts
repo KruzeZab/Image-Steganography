@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios, { type AxiosResponse } from "axios";
 import jwt_decode from "jwt-decode";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setTokens, setUser } from "../features/auth/authSlice";
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL: string = import.meta.env.VITE_SERVER_URL;
 
 interface JWTUser {
   token_type: string;
@@ -13,6 +13,15 @@ interface JWTUser {
   jti: string;
   user_id: string;
   username: string;
+}
+
+interface NewToken {
+  access: string;
+  refresh: string;
+}
+
+interface ResponsePayload {
+  access: string;
 }
 
 const useServer = () => {
@@ -33,11 +42,14 @@ const useServer = () => {
 
     if (!isExpired) return req;
 
-    const response = await axios.post(`${SERVER_URL}/api/user/token/refresh/`, {
-      refresh: tokens?.refresh,
-    });
+    const response: AxiosResponse<ResponsePayload> = await axios.post(
+      `${SERVER_URL}/api/user/token/refresh/`,
+      {
+        refresh: tokens?.refresh,
+      }
+    );
 
-    const newToken = { ...tokens, access: response.data.access };
+    const newToken: NewToken = { ...tokens, access: response.data.access };
 
     localStorage.setItem("authTokens", JSON.stringify(tokens));
 

@@ -14,7 +14,6 @@ import {
   Link,
   Stack,
   Text,
-  Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
 import {
