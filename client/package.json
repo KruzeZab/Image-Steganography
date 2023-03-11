@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "prepare": "cd ../ && husky install ./client/.husky",
+    "prepare": "cd .. && husky install client/.husky",
     "stylelint": "stylelint '**/*.{css,js,jsx,ts,tsx}'",
     "stylelint:fix": "stylelint '**/*.{css,js,jsx,ts,tsx}' --fix",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
