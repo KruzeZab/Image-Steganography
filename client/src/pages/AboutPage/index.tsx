@@ -7,9 +7,20 @@ import {
   ListItem,
   Text,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { MdCheckCircle } from "react-icons/md";
+import useServer from "../../hooks/useServer";
 
 const AboutPage = () => {
+  const auth = useServer();
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await auth.get("api/encrypt/");
+      console.log(response.data);
+    };
+    getProfile();
+  }, []);
   return (
     <>
       <Container maxW={"8xl"} pt={20}>

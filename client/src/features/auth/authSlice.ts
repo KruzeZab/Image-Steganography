@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import jwt_decode from "jwt-decode";
-
-import server from "../../lib/axios";
 
 interface LoginUserParams {
   username: string;
@@ -26,12 +24,14 @@ interface InitialState {
   error: string | null;
 }
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (formValues: LoginUserParams, { rejectWithValue }) => {
     try {
-      const response: AxiosResponse<ResponsePayload> = await server.post(
-        "user/token/",
+      const response: AxiosResponse<ResponsePayload> = await axios.post(
+        `${SERVER_URL}/api/user/token/`,
         {
           username: formValues.username,
           password: formValues.password,
@@ -63,12 +63,25 @@ export const loginUser = createAsyncThunk(
 
 const userToken = localStorage.getItem("authTokens") ?? "";
 
+const getUserInfo = () => {
+  if (userToken) {
+    const { user_id, username } = jwt_decode<UserPayload>(
+      JSON.parse(userToken).access
+    );
+
+    return {
+      user_id,
+      username,
+    };
+  }
+
+  return null;
+};
+
 const initialState: InitialState = {
   tokens: userToken ? JSON.parse(userToken) : null,
   loading: false,
-  user: userToken
-    ? jwt_decode<UserPayload>(JSON.parse(userToken).access)
-    : null,
+  user: getUserInfo(),
   error: null,
 };
 
@@ -76,6 +89,12 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setTokens: (state, action) => {
+      state.tokens = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
     logout: (state) => {
       localStorage.removeItem("authTokens");
       state.tokens = null;
@@ -95,6 +114,7 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
+      console.log(action);
       state.error = (action.payload as string) || "Something went wrong";
     });
   },
@@ -102,4 +122,4 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
-export const { logout } = authSlice.actions;
+export const { logout, setUser, setTokens } = authSlice.actions;
