@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { loginUser } from "../authActions";
 import SigninBanner from "./renders/SigninBanner";
 import SigninForm from "./renders/SigninForm";
-import { Heading } from "@chakra-ui/react";
 
 const SigninView = () => {
   const rhf = useForm();
