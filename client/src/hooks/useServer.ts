@@ -2,7 +2,11 @@ import axios, { type AxiosResponse } from "axios";
 import jwt_decode from "jwt-decode";
 import dayjs from "dayjs";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setTokens, setUser } from "../features/auth/authSlice";
+import {
+  setAuthenticated,
+  setTokens,
+  setUser,
+} from "../features/auth/authSlice";
 
 const SERVER_URL: string = import.meta.env.VITE_SERVER_URL;
 
@@ -55,6 +59,7 @@ const useServer = () => {
 
     dispatch(setTokens(newToken));
     dispatch(setUser(jwt_decode<JWTUser>(newToken.access)));
+    dispatch(setAuthenticated(true));
 
     req.headers.Authorization = `Bearer ${newToken.access}`;
     return req;

@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -16,11 +17,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { MdError } from "react-icons/md";
 import {
   emailValidate,
   passwordValidate,
   usernameValidate,
 } from "../helpers/signupHelper";
+import { useAppSelector } from "../../../../app/hooks";
 
 interface SignupFormProps {
   onSubmit: (values: any) => void;
@@ -38,6 +41,8 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
   // State
   const [showPass, setShowPass] = useState(false);
 
+  const { loading, error } = useAppSelector((state) => state.auth);
+
   // Handlers
   const handleInstantChange: (
     e: React.ChangeEvent<HTMLInputElement>
@@ -47,7 +52,13 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
   };
 
   return (
-    <Box as={"form"} mt={10} onSubmit={handleSubmit(onSubmit)}>
+    <Box as={"form"} onSubmit={handleSubmit(onSubmit)}>
+      {error && (
+        <Alert status="error" display="flex" alignItems={"center"} mb={4}>
+          <MdError fontSize={"18px"} />
+          <Text ml={1}>{error}</Text>
+        </Alert>
+      )}
       <Stack spacing={4}>
         <FormControl isInvalid={!!errors.username}>
           <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
@@ -78,6 +89,7 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
           </FormLabel>
           <Input
             {...register("email", {
+              onBlur: handleInstantChange,
               validate: {
                 ...emailValidate,
               },
@@ -154,7 +166,7 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
       </Stack>
       <Button
         type="submit"
-        // isLoading={loading}
+        isLoading={loading}
         fontFamily={"heading"}
         mt={8}
         w={"full"}
@@ -162,7 +174,6 @@ const SignupForm = ({ onSubmit }: SignupFormProps) => {
       >
         Sign up
       </Button>
-
       <Text color={useColorModeValue("gray.600", "gray.300")} mt={5}>
         Already have an account?{" "}
         <Link

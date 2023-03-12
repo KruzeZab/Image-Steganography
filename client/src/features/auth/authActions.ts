@@ -41,7 +41,52 @@ export const loginUser = createAsyncThunk(
 
       return { user, tokens: response.data };
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.detail);
+    }
+  }
+);
+
+interface CreateUserParams {
+  username: string;
+  email: string;
+  password: string;
+  cfmPassword: string;
+}
+
+export const createUser = createAsyncThunk(
+  "auth/createUser",
+  async (formValues: CreateUserParams, { rejectWithValue }) => {
+    try {
+      const response: AxiosResponse<ResponsePayload> = await axios.post(
+        `${SERVER_URL}/api/user/signup/`,
+        {
+          username: formValues.username,
+          email: formValues.email,
+          password: formValues.password,
+          password2: formValues.cfmPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { user_id, username } = jwt_decode<UserPayload>(
+        response.data.access
+      );
+
+      const user = {
+        user_id,
+        username,
+      };
+
+      localStorage.setItem("authTokens", JSON.stringify(response.data));
+
+      return { user, tokens: response.data };
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.detail);
     }
   }
 );

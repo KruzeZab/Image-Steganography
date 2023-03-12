@@ -1,21 +1,21 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 
-export interface PrivateRouteProps {
+export interface GuestRouteProps {
   outlet: JSX.Element;
 }
 
-const PrivateRoute = ({ outlet }: PrivateRouteProps) => {
+const GuestRoute = ({ outlet }: GuestRouteProps) => {
   const authenticated = useAppSelector((state) => state.auth.authenticated);
   const location = useLocation();
 
-  const next = location.state?.next ?? "/login/";
+  const next = location.state?.next ?? "/";
 
-  if (authenticated) {
+  if (!authenticated) {
     return outlet;
   } else {
     return <Navigate to={{ pathname: next }} />;
   }
 };
 
-export default PrivateRoute;
+export default GuestRoute;

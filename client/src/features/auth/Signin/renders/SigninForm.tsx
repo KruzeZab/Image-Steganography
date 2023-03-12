@@ -1,5 +1,6 @@
 import propTypes from "prop-types";
 import {
+  Alert,
   Box,
   Button,
   Checkbox,
@@ -15,8 +16,10 @@ import {
 import { useFormContext } from "react-hook-form";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { MdError } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../../../../app/hooks";
 import { logout } from "../../authSlice";
+import { passwordValidate, usernameValidate } from "../helpers/signinHelper";
 
 interface SigninFormProps {
   onSubmit: (values: any) => void;
@@ -26,36 +29,35 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useFormContext();
 
   // State
   const [showPass, setShowPass] = useState(false);
 
-  const { loading } = useAppSelector((state) => state.auth);
+  const { loading, error } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-
-  // Handlers
-  const handleInstantChange: (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => void = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setValue(name, value, { shouldValidate: true });
-  };
 
   return (
     <Box>
+      {error && (
+        <Alert status="error" display="flex" alignItems={"center"} mb={4}>
+          <MdError fontSize={"18px"} />
+          <Text ml={1}>{error}</Text>
+        </Alert>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
           <FormControl isInvalid={!!errors.username}>
             <FormLabel color={useColorModeValue("gray.600", "gray.300")}>
-              Email:
+              Username:
             </FormLabel>
             <Input
               autoFocus
               {...register("username", {
-                onBlur: handleInstantChange,
+                validate: {
+                  ...usernameValidate,
+                },
               })}
               bg={useColorModeValue("gray.200", "gray.700")}
               border={0}
@@ -72,7 +74,11 @@ const SigninForm = ({ onSubmit }: SigninFormProps) => {
               Password:
             </FormLabel>
             <Input
-              {...register("password", {})}
+              {...register("password", {
+                validate: {
+                  ...passwordValidate,
+                },
+              })}
               type={showPass ? "text" : "password"}
               bg={useColorModeValue("gray.200", "gray.700")}
               border={0}

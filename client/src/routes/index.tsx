@@ -13,6 +13,7 @@ import PageNotFound from "../pages/PageNotFound";
 import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
 import PrivateRoute from "./PrivateRoute";
+import GuestRoute from "./GuestRoute";
 
 // const defaultPrivateRouteProps: Omit<PrivateRouteProps, "outlet"> = {
 //   isAuthenticated: false,
@@ -22,8 +23,12 @@ import PrivateRoute from "./PrivateRoute";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="login/" element={<SigninPage />} />
-      <Route path="register/" element={<SignupPage />} />
+      <Route path="login/" element={<GuestRoute outlet={<SigninPage />} />} />
+
+      <Route
+        path="register/"
+        element={<GuestRoute outlet={<SignupPage />} />}
+      />
 
       <Route path="" element={<HomePage />} />
       <Route path="about/" element={<AboutPage />} />

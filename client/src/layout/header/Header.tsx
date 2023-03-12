@@ -26,13 +26,21 @@ import { BiLinkExternal } from "react-icons/bi";
 
 import { Link as RouterLink } from "react-router-dom";
 import { type NavItem, NAV_ITEMS } from "../../data/links";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+
+import { logout } from "../../features/auth/authSlice";
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
   const loading = useAppSelector((state) => state.auth.loading);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <Box as="header" position="fixed" w="100%" zIndex={999} pb={20}>
@@ -161,6 +169,7 @@ const Header = () => {
             >
               Sign Up
             </Button>
+            <Button onClick={() => { handleLogout(); }}>Logout</Button>
           </Stack>
         </Flex>
       </Flex>
