@@ -12,6 +12,7 @@ import HomePage from "../pages/HomePage";
 import PageNotFound from "../pages/PageNotFound";
 import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
+import EncryptPage from "../pages/EncryptPage";
 import PrivateRoute from "./PrivateRoute";
 import GuestRoute from "./GuestRoute";
 
@@ -24,7 +25,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="login/" element={<GuestRoute outlet={<SigninPage />} />} />
-
       <Route
         path="register/"
         element={<GuestRoute outlet={<SignupPage />} />}
@@ -37,8 +37,8 @@ const router = createBrowserRouter(
       <Route path="*" element={<PageNotFound />} />
 
       <Route
-        path="protected"
-        element={<PrivateRoute outlet={<AboutPage />} />}
+        path="encrypt/"
+        element={<PrivateRoute outlet={<EncryptPage />} />}
       />
     </Route>
   )

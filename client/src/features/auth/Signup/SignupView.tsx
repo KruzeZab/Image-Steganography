@@ -1,7 +1,7 @@
 import { Heading, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch } from "../../../app/hooks";
 import { createUser } from "../authActions";
 import SignupBanner from "./renders/SignupBanner";
 import SignupForm from "./renders/SignupForm";
@@ -13,15 +13,11 @@ const SignupView = () => {
 
   const dispatch = useAppDispatch();
 
-  const { authenticated } = useAppSelector((state) => state.auth);
-
-  const onSubmit = (values: any) => {
-    dispatch(createUser(values)).then(() => {
-      if (authenticated) {
-        rhf.reset();
-        navigate("/protected/");
-      }
-    });
+  const onSubmit = async (values: any) => {
+    const res = await dispatch(createUser(values));
+    if (res.meta.requestStatus === "fulfilled") {
+      navigate("/");
+    }
   };
 
   return (

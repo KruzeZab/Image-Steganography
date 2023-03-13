@@ -15,7 +15,6 @@ export interface UserPayload {
 
 interface InitialState {
   tokens: null | ResponsePayload;
-  authenticated: boolean;
   loading: boolean;
   user: UserPayload | null;
   error: string | null;
@@ -44,7 +43,6 @@ const initialState: InitialState = {
   loading: false,
   user: getUserInfo(),
   error: null,
-  authenticated: false,
 };
 
 const authSlice = createSlice({
@@ -57,14 +55,10 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
-    setAuthenticated: (state, action) => {
-      state.authenticated = action.payload;
-    },
     logout: (state) => {
       localStorage.removeItem("authTokens");
       state.tokens = null;
       state.user = null;
-      state.authenticated = false;
     },
   },
   extraReducers: (builder) => {
@@ -74,7 +68,6 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.authenticated = true;
       state.user = action.payload.user;
       state.tokens = action.payload.tokens;
       state.error = null;
@@ -91,7 +84,6 @@ const authSlice = createSlice({
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
-      state.authenticated = true;
       state.tokens = action.payload.tokens;
       state.error = null;
     });
@@ -104,5 +96,4 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
-export const { logout, setUser, setTokens, setAuthenticated } =
-  authSlice.actions;
+export const { logout, setUser, setTokens } = authSlice.actions;
