@@ -7,15 +7,15 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   {
     label: "About",
-    href: "/about/",
+    href: "/about",
   },
   {
     label: "Get started",
-    href: "/register/",
+    href: "/register",
   },
   {
     label: "How it works?",
-    href: "/guide/",
+    href: "/guide",
   },
   {
     label: "View Github",
@@ -24,10 +24,14 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     label: "Donate us",
-    href: "/donate/",
+    href: "/donate",
   },
   {
     label: "Help Center",
-    href: "/help-and-support/",
+    href: "/help-and-support",
+  },
+  {
+    label: "Encrypt",
+    href: "/encrypt",
   },
 ];

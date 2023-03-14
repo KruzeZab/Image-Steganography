@@ -21,27 +21,21 @@ import GuestRoute from "./GuestRoute";
 //   authenticationPath: "/login",
 // };
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
-      <Route path="login/" element={<GuestRoute outlet={<SigninPage />} />} />
-      <Route
-        path="register/"
-        element={<GuestRoute outlet={<SignupPage />} />}
-      />
+export const routes = (
+  <Route path="/" element={<RootLayout />}>
+    <Route path="login" element={<GuestRoute outlet={<SigninPage />} />} />
+    <Route path="register" element={<GuestRoute outlet={<SignupPage />} />} />
 
-      <Route path="" element={<HomePage />} />
-      <Route path="about/" element={<AboutPage />} />
-      <Route path="guide/" element={<GuidePage />} />
-      <Route path="donate/" element={<DonatePage />} />
-      <Route path="*" element={<PageNotFound />} />
+    <Route path="" element={<HomePage />} />
+    <Route path="about" element={<AboutPage />} />
+    <Route path="guide" element={<GuidePage />} />
+    <Route path="donate" element={<DonatePage />} />
+    <Route path="*" element={<PageNotFound />} />
 
-      <Route
-        path="encrypt/"
-        element={<PrivateRoute outlet={<EncryptPage />} />}
-      />
-    </Route>
-  )
+    <Route path="encrypt" element={<PrivateRoute outlet={<EncryptPage />} />} />
+  </Route>
 );
 
-export default router;
+export const routeElements = createRoutesFromElements(routes);
+
+export default createBrowserRouter(createRoutesFromElements(routes));

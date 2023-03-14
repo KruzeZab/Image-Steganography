@@ -43,7 +43,7 @@ const Header = () => {
   };
 
   return (
-    <Box as="header" position="fixed" w="100%" zIndex={999} pb={20}>
+    <Box as="header" position="fixed" w="100%" zIndex={999}>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -169,7 +169,13 @@ const Header = () => {
             >
               Sign Up
             </Button>
-            <Button onClick={() => { handleLogout(); }}>Logout</Button>
+            <Button
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Logout
+            </Button>
           </Stack>
         </Flex>
       </Flex>
