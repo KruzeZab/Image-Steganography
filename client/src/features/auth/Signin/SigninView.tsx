@@ -32,6 +32,7 @@ const SigninView = () => {
 
   return (
     <Stack
+      mb={10}
       bg={useColorModeValue("white", "gray.800")}
       alignSelf={"center"}
       border="1px solid"

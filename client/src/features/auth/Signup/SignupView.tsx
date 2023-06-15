@@ -48,6 +48,7 @@ const SignupView = () => {
         </Heading>
       </Stack>
       <Stack
+        mb={10}
         bg={useColorModeValue("white", "gray.800")}
         alignSelf={"flex-start"}
         border="1px solid"

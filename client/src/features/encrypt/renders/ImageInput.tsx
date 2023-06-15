@@ -8,6 +8,7 @@ import {
   useBreakpointValue,
   useToast,
   useColorModeValue,
+  Stack,
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
@@ -115,18 +116,16 @@ const ImageInput = ({
       );
     } else {
       return (
-        <>
+        <Stack align={"center"} p={2} textAlign={"center"}>
           <MdCloudUpload fontSize={"56px"} />
           <input {...getInputProps()} />
 
           {isDragActive ? (
             <Text>Drop the image here</Text>
           ) : (
-            <Text>
-              Drag and drop the image here, or click to select an image
-            </Text>
+            <Text>Drag and drop the image here, or select an image</Text>
           )}
-        </>
+        </Stack>
       );
     }
   }, [file, isDragActive, getInputProps]);

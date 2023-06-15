@@ -14,9 +14,12 @@ import {
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { Link as RouterLink } from "react-router-dom";
 
+import { useAppSelector } from "../../../app/hooks";
 import mainBanner from "./main-banner.jpeg";
 
 const Hero = () => {
+  const user = useAppSelector((state) => state.auth.user);
+
   return (
     <Container maxW={"7xl"}>
       <Stack
@@ -65,7 +68,7 @@ const Hero = () => {
           >
             <Button
               as={RouterLink}
-              to={"/register/"}
+              to={user ? "/dashboard/" : "/register/"}
               rounded={"full"}
               size={"lg"}
               fontWeight={"normal"}

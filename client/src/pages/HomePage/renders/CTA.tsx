@@ -10,9 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
+import { useAppSelector } from "../../../app/hooks";
 import ctaBanner from "./cta-banner.jpeg";
 
 export default function CallToActionWithVideo() {
+  const user = useAppSelector((state) => state.auth.user);
+
   return (
     <Container maxW={"7xl"}>
       <Stack
@@ -48,7 +51,7 @@ export default function CallToActionWithVideo() {
               bg={"blue.400"}
               _hover={{ bg: "blue.500" }}
               as={RouterLink}
-              to="/register"
+              to={user ? "/dashboard/" : "/register/"}
             >
               Get started
             </Button>
