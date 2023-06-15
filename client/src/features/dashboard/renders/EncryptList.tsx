@@ -72,9 +72,11 @@ const EncryptList = ({ loading, encrypts }: EncryptListProps) => {
 
   return (
     <>
-      <Heading as="h4" size="md" mb={5}>
-        Your Encryptions
-      </Heading>
+      {encrypts && (
+        <Heading as="h4" size="md" mb={5}>
+          Your Encryptions
+        </Heading>
+      )}
       <SimpleGrid minChildWidth={"320px"} spacing={"20px"}>
         <EncryptDetail encrypts={encrypts} />
       </SimpleGrid>

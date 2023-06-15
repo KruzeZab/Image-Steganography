@@ -72,9 +72,12 @@ const DecryptList = ({ loading, decrypts }: DecryptListProps) => {
 
   return (
     <>
-      <Heading as="h4" size="md" mb={5}>
-        Your Decryptions
-      </Heading>
+      {decrypts && (
+        <Heading as="h4" size="md" mb={5}>
+          Your Decryptions
+        </Heading>
+      )}
+
       <SimpleGrid minChildWidth={"320px"} spacing={"20px"}>
         <DecryptDetail decrypts={decrypts} />
       </SimpleGrid>
